@@ -1,0 +1,99 @@
+create database QLSV
+
+use QLSV
+create table DMKHOA
+(
+	MaKH char(6) primary key,
+	TenKhoa nvarchar(30) not null
+)
+
+create table SINHVIEN
+(
+	MaSV char(6) primary key,
+	HoSV nvarchar(30) not null,
+	TenSV nvarchar(15) not null,
+	GioiTinh bit not null default 'nam 1, nu 0',
+	NgaySinh datetime not null,
+	NoiSinh nvarchar(50),
+	DiaChi nvarchar(50),
+	Quan nvarchar(10),
+	MaKH char(6),
+	HocBong money,
+	foreign key (MaKH) references DMKHOA(MaKH)
+)
+
+create table MONHOC
+(
+	MaMH char(6) primary key,
+	TenMH nvarchar(50) not null,
+	SoTiet int not null
+)
+
+create table KETQUA
+(
+	MaSV char(6) not null,
+	MaMH char(6) not null,
+	Diem float,
+	primary key(MaSV,MaMH),
+	foreign key (MaSV) references SINHVIEN(MaSV),
+	Foreign key (MaMH) references MONHOC(MaMH)
+)
+
+insert into DMKHOA(MaKH,TenKhoa)
+values('AV',N'Anh Văn')
+insert into DMKHOA(MaKH,TenKhoa)
+values('TH',N'Tin Học')
+insert into DMKHOA(MaKH,TenKhoa)
+values('TR',N'Triết Học')
+insert into DMKHOA(MaKH,TenKhoa)
+values('VL',N'Vật Lý')
+
+select * from SINHVIEN
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO1',N'Nguyễn Thị',N'Hải',0,'02/23/77',N'Sài Gòn',N'12B Võ Văn Tần','Q3','TH',10000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO2',N'Trần Văn',N'Chính',1,'12/24/77',N'Sài Gòn',N'34 Nguyễn Bỉnh Khiêm','Q1','TH',120000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO3',N'Lê Bạch',N'Yến',0,'02/21/96',N'Hà Nội',N'765 PasTuer','Q3','TH',140000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO4',N'Trần Anh',N'Tuấn',1,'11/20/77',N'Long An',N'12 Điện Biên Phủ','BT','AV',80000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO5',N'Trần Thanh',N'Triều',1,'02/13/77',N'Hà Nội',N'3 Nguyễn Thiện Thuật','Q3','AV',80000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('AO6',N'Nguyễn Văn',N'Chinh',1,'12/31/75',N'Sài Gòn',N'12 Lê Lợi','Q5','AV',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('B01',N'Trần Thanh',N'Mai',0,'08/12/77',N'Bến Tre',N'32 Lê Lai','Q1','TH',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('B02',N'Trần Thu',N'Thủy',0,'01/01/77',N'Sài Gòn',N'45 Nguyễn Thái Sơn','BC','TH',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('B03',N'Lê Thị',N'Thanh',0,'01/01/75',N'Sài Gòn',N'345 Nguyễn Kiệm','Q1','AV',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('B04',N'Trần Trọng',N'Kim',1,'12/20/77',N'Sài Gòn',N'123 Lê Văn Sỹ','Q1','AV',12000)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('C01',N'Tào Hồng',N'Thiên',1,'07/01/78',N'Sài Gòn',N'56 Hoàng Diệu','TB','TH',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('C02',N'Hoàng Minh',N'Châu',1,'05/03/76',N'Sài Gòn',N'102 Kỳ Động','TB','AV',0)
+insert into SINHVIEN(MaSV,HoSV,TenSV,GioiTinh,NgaySinh,NoiSinh,DiaChi,Quan,MaKH,HocBong)
+values('C03',N'Phan Quỳnh',N'Hương',0,'05/05/79',N'Sài Gòn','234 Phạm Văn Hai','TB','AV',0)
+
+use QLSV
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('01',N'Cơ sở Dữ liệu',45)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('02',N'Trí tuệ Nhân Tạo',45)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('03',N'Truyền Tin',45)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('04',N'Đồ Họa',60)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('05',N'Văn Phạm',60)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('06',N'Đàm thoại',60)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('07',N'Vật Lý Nguyên Tử',45)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('08',N'Vật Lý Địa Cầu',45)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('09',N'Triết học Đông phương',75)
+insert into MONHOC(MaMH,TenMH,SoTiet)
+values('10',N'Triết học Tây Phương',75)
